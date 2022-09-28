@@ -7,16 +7,30 @@ const skills = [
     {skill: "Full-stack development", language: "javascript", id: 006},
   ];
 
-  module.exports = {
-    getAll,
-    getOne
-  };
+module.exports = {
+  getAll,
+  getOne,
+  create,
+  deleteOne,
+};
 
-  function getAll() {
-    return skills;
-  }
+function getAll() {
+  return skills;
+}
 
-  function getOne(id) {
-    id = parseInt(id);
-    return skills.find(skill => skill.id === id);
-  }
+function getOne(id) {
+  id = parseInt(id);
+  return skills.find(skill => skill.id === id);
+}
+
+function create(skill) {
+  skill.id = Date.now() % 1000000;
+  skill.language = "Javascript";
+  skills.push(skill)
+}
+
+function deleteOne(id) {
+  id = parseInt(id);
+  const idx = skills.findIndex(skill => skill.id === id);
+  skills.splice(idx, 1);
+}
